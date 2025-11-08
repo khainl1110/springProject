@@ -1,0 +1,17 @@
+# Use the official Postgres image from the Docker Hub
+FROM postgres:latest
+
+# Set environment variables for default user, password, and database
+ENV POSTGRES_USER=user
+ENV POSTGRES_DB=movie_booking
+
+# Optionally, copy any initialization SQL scripts to initialize the database on first run
+# COPY init.sql /docker-entrypoint-initdb.d/
+
+# Expose the default Postgres port
+EXPOSE 5432
+
+# To build the Docker image, use the following command:
+# docker build . -t postgresql1
+# docker run --name my-postgres-container -e POSTGRES_PASSWORD=yourpassword -v C:\Users\khain\Documents\Projects\docker_volum\pgdata:/var/lib/postgresql  -p 5432:5432 -d postgresql1:latest
+                                                                                                                                               
