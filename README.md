@@ -1,1 +1,3 @@
-Java JPA and postgresql, use ManyToOne mapping
+REST API with Postgresql image
+
+Connect to Kafka docker image
