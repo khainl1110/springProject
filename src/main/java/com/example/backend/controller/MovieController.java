@@ -1,6 +1,5 @@
 package com.example.backend.controller;
 
-import com.example.backend.entity.Customer;
 import com.example.backend.entity.Movie;
 import com.example.backend.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;

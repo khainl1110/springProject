@@ -3,7 +3,7 @@ FROM postgres:latest
 
 # Set environment variables for default user, password, and database
 ENV POSTGRES_USER=user
-ENV POSTGRES_DB=movie_booking
+ENV POSTGRES_DB=studentManagement
 
 # Optionally, copy any initialization SQL scripts to initialize the database on first run
 # COPY init.sql /docker-entrypoint-initdb.d/
@@ -13,5 +13,16 @@ EXPOSE 5432
 
 # To build the Docker image, use the following command:
 # docker build . -t postgresql1
-# docker run --name my-postgres-container -e POSTGRES_PASSWORD=yourpassword -v C:\Users\khain\Documents\Projects\docker_volum\pgdata:/var/lib/postgresql  -p 5432:5432 -d postgresql1:latest
+# docker run --name my-postgres-container -e POSTGRES_PASSWORD=yourpassword -v C:\Users\khain\Documents\Projects\docker_volume\pgdata:/var/lib/postgresql  -p 5432:5432 -d postgresql1:latest
+# Note: Replace 'yourpassword' with a secure password of your choice.
+# The -v flag mounts a volume from the host to the container for data persistence.
+# The -p flag maps the container's port 5432 to the host's port 5432.
+# View tables: docker exec -it my-postgres-container psql -U user -l
+# Exec into the database: docker exec -it my-postgres-container psql -U user -d studentManagement
+# View table schema: \d tablename
+# List all tables: \dt
+# Modify stuff: ALTER TABLE student
+# ADD CONSTRAINT unique_email UNIQUE (email);
+
+
                                                                                                                                                

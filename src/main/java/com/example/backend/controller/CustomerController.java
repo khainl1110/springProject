@@ -2,7 +2,6 @@ package com.example.backend.controller;
 
 import com.example.backend.entity.Booking;
 import com.example.backend.entity.Customer;
-import com.example.backend.entity.Movie;
 import com.example.backend.repository.BookingRepository;
 import com.example.backend.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
