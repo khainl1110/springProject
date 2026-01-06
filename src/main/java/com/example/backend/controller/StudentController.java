@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.backend.entity.Student;
 import com.example.backend.repository.StudentRepository;
 import java.util.Optional;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/student")
@@ -26,7 +28,14 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+    public ResponseEntity<?> createStudent(@RequestBody Student student) {
+        if (student.getEmail() == null) {
+            return ResponseEntity.badRequest().body(Map.of("error", "Email is required"));
+        }
+        Optional<Student> existing = studentRepository.findByEmail(student.getEmail());
+        if (existing.isPresent()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(Map.of("error", "Email already exists"));
+        }
         Student createdStudent = studentRepository.save(student);
         return ResponseEntity.ok(createdStudent);
     }
