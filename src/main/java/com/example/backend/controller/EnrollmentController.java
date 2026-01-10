@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
+import java.util.Set;
+import java.util.List;
+import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/enrollment")
@@ -61,6 +66,19 @@ public class EnrollmentController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student or Course not found");
         }
 
+        // check prerequisites: student must have completed all prerequisite courses
+        Set<Course> prereqs = courseOpt.get().getPrerequisites();
+        if (prereqs != null && !prereqs.isEmpty()) {
+            List<String> missing = prereqs.stream()
+                .filter(p -> !enrollmentRepository.existsByStudentIdAndCourseIdAndCompletedTrue(studentId, p.getId()))
+                .map(Course::getName)
+                .collect(Collectors.toList());
+            if (!missing.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Missing completed prerequisites: " + String.join(", ", missing));
+            }
+        }
+
         if (enrollmentRepository.existsByStudentIdAndCourseId(studentId, courseId)) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Student already enrolled in this course");
         }
@@ -70,5 +88,15 @@ public class EnrollmentController {
         enrollment.setCourse(courseOpt.get());
         Enrollment saved = enrollmentRepository.save(enrollment);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @PutMapping("/{id}/complete")
+    public ResponseEntity<?> completeEnrollment(@PathVariable Long id) {
+        Optional<Enrollment> opt = enrollmentRepository.findById(id);
+        if (opt.isEmpty()) return ResponseEntity.notFound().build();
+        Enrollment e = opt.get();
+        e.setCompleted(true);
+        enrollmentRepository.save(e);
+        return ResponseEntity.ok(e);
     }
 }

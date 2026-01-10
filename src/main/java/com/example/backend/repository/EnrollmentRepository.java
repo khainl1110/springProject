@@ -6,4 +6,6 @@ import com.example.backend.entity.Enrollment;
 
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 	boolean existsByStudentIdAndCourseId(Long studentId, Long courseId);
+
+	boolean existsByStudentIdAndCourseIdAndCompletedTrue(Long studentId, Long courseId);
 }

@@ -24,6 +24,8 @@ public class Enrollment {
     @JoinColumn(name = "course_id")
     private Course course;
 
+    private boolean completed = false;
+
     // Getters and setters
 
     public Long getId() {
@@ -38,11 +40,19 @@ public class Enrollment {
         return course;
     }
 
+    public boolean isCompleted() {
+        return completed;
+    }
+
     public void setStudent(Student student) {
         this.student = student;
     }
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 }
