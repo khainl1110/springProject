@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.backend.entity.Course;
 import com.example.backend.entity.Enrollment;
 import com.example.backend.entity.Student;
+import com.example.backend.repository.Miscell;
 
 @SpringBootTest
 public class EnrollmentRepositoryTest {
@@ -29,39 +30,15 @@ public class EnrollmentRepositoryTest {
         studentRepository.deleteAll();
     }
 
-    void addOneStudent() {
-        Student student = new Student();
-        student.setEmail("john.doe@example.com");
-        student.setName("John Doe");
-        studentRepository.save(student);
-    }
-
-    void addOneCourse() {
-        Course course = new Course("Math 101", "Basic Mathematics");
-        courseRepository.save(course);
-    }
-
-    void addOneEnrollment(Student student, Course course) {
-        Enrollment enrollment = new Enrollment();
-        enrollment.setStudent(student);
-        enrollment.setCourse(course);
-        enrollmentRepository.save(enrollment);
-    }
-
-    void addCoursePrerequisite(Course course, Course prerequisite) {
-        course.getPrerequisites().add(prerequisite);
-        courseRepository.save(course);
-    }
-
     @Test
     void testOneEnrollmentDetails() {
-        addOneStudent();
+        Miscell.addOneStudent("john.doe@example.com", "John Doe", studentRepository);
         Student student = studentRepository.findAll().get(0);
 
-        addOneCourse();
+        Miscell.addOneCourse("Math 101", "Basic Mathematics", courseRepository);
         Course course = courseRepository.findAll().get(0);
 
-        addOneEnrollment(student, course);
+        Miscell.addOneEnrollment(student, course, enrollmentRepository);
         Enrollment enrollment = enrollmentRepository.findAll().get(0);
         assert(enrollmentRepository.count() == 1);
         assert(enrollment.getStudent().getName().equals("John Doe"));
@@ -70,8 +47,7 @@ public class EnrollmentRepositoryTest {
 
     @Test
     void testEnrollmentWithPrerequisite() {
-        System.out.println("=== DEBUG START ===");
-        addOneStudent();
+        Miscell.addOneStudent("jane.doe@example.com", "Jane Doe", studentRepository);
         Student student = studentRepository.findAll().get(0);
 
         Course prerequisite = new Course("Intro to Math", "Introduction to Mathematics");
@@ -81,17 +57,15 @@ public class EnrollmentRepositoryTest {
         mainCourse.getPrerequisites().add(prerequisite);
         courseRepository.save(mainCourse);
 
-        // ✅ ADD THESE DEBUG LINES
-        System.out.println("=== DEBUG START ===");
         System.out.println("Student count: " + studentRepository.count());
         System.out.println("Main course ID: " + mainCourse.getId());
         System.out.println("Prerequisites: " + mainCourse.getPrerequisites().size());
     
         try {
-            addOneEnrollment(student, mainCourse);
-            System.out.println("✅ Enrollment SUCCEEDED");
+            Miscell.addOneEnrollment(student, mainCourse, enrollmentRepository);
+            System.out.println("Enrollment SUCCEEDED");
         } catch (Exception e) {
-            System.out.println("❌ Enrollment FAILED: " + e.getMessage());
+            System.out.println("Enrollment FAILED: " + e.getMessage());
             e.printStackTrace();
         }
         Enrollment enrollment = enrollmentRepository.findAll().get(0);
