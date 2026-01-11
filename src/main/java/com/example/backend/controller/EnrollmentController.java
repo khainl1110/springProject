@@ -5,6 +5,7 @@ import com.example.backend.entity.Student;
 import com.example.backend.entity.Course;
 import com.example.backend.repository.EnrollmentRepository;
 import com.example.backend.repository.StudentRepository;
+import com.example.backend.service.EnrollmentService;
 import com.example.backend.repository.CourseRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +28,16 @@ public class EnrollmentController {
     private final EnrollmentRepository enrollmentRepository;
     private final StudentRepository studentRepository;
     private final CourseRepository courseRepository;
+    private final EnrollmentService enrollmentService;
 
     public EnrollmentController(EnrollmentRepository enrollmentRepository,
                                 StudentRepository studentRepository,
-                                CourseRepository courseRepository) {
+                                CourseRepository courseRepository,
+                                EnrollmentService enrollmentService) {
         this.enrollmentRepository = enrollmentRepository;
         this.studentRepository = studentRepository;
         this.courseRepository = courseRepository;
+        this.enrollmentService = enrollmentService;
     }
 
     public static class EnrollmentRequest {
@@ -66,17 +70,10 @@ public class EnrollmentController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student or Course not found");
         }
 
-        // check prerequisites: student must have completed all prerequisite courses
-        Set<Course> prereqs = courseOpt.get().getPrerequisites();
-        if (prereqs != null && !prereqs.isEmpty()) {
-            List<String> missing = prereqs.stream()
-                .filter(p -> !enrollmentRepository.existsByStudentIdAndCourseIdAndCompletedTrue(studentId, p.getId()))
-                .map(Course::getName)
-                .collect(Collectors.toList());
-            if (!missing.isEmpty()) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Missing completed prerequisites: " + String.join(", ", missing));
-            }
+        List<String> missingPrereqs = enrollmentService.getMissingPrerequisites(studentId, courseOpt.get());
+        if (!missingPrereqs.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body("Missing completed prerequisites: " + String.join(", ", missingPrereqs));
         }
 
         if (enrollmentRepository.existsByStudentIdAndCourseId(studentId, courseId)) {
