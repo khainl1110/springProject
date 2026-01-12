@@ -32,11 +32,6 @@ public class StudentController {
     @Autowired 
     private StudentService studentService;
 
-    @GetMapping
-    public Iterable<Student> returnAllStudents() {
-        return studentRepository.findAll();
-    }
-
     @GetMapping("/{email}")
     public Student getEachStudentDetails(@PathVariable String email) {
         return studentService.getStudentWithEnrollments(email);

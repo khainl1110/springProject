@@ -10,7 +10,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.example.backend.entity.Course;
 import com.example.backend.entity.Enrollment;
 import com.example.backend.entity.Student;
-import com.example.backend.repository.Miscell;
 
 @SpringBootTest
 public class EnrollmentRepositoryTest {

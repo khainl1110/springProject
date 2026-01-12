@@ -3,6 +3,9 @@ package com.example.backend.controller;
 import com.example.backend.entity.Enrollment;
 import com.example.backend.entity.Student;
 import com.example.backend.entity.Course;
+import com.example.backend.dto.EnrollmentDto;
+import com.example.backend.dto.StudentDto;
+import com.example.backend.dto.CourseDto;
 import com.example.backend.repository.EnrollmentRepository;
 import com.example.backend.repository.StudentRepository;
 import com.example.backend.service.EnrollmentService;
@@ -16,9 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 import org.springframework.web.bind.annotation.GetMapping;
-import java.util.Set;
 import java.util.List;
-import java.util.stream.Collectors;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -50,10 +51,34 @@ public class EnrollmentController {
         public void setCourseId(Long courseId) { this.courseId = courseId; }
     }
 
+    // This one is circular reference
     @GetMapping
     public Iterable<Enrollment> getMethodName() {
         return enrollmentRepository.findAll();
     }
+
+    @GetMapping("/all")
+    public List<EnrollmentDto> getCourseDetailsWithoutCircularReference() {
+        List<Enrollment> enrollments = enrollmentRepository.findAll();
+        return enrollments.stream().map(this::toDto).toList();
+    }
+
+    private EnrollmentDto toDto(Enrollment enrollment) {
+        Student s = enrollment.getStudent();
+        StudentDto sd = null;
+        if (s != null) {
+            sd = new StudentDto(s.getId(), s.getName(), s.getEmail());
+        }
+
+        Course c = enrollment.getCourse();
+        CourseDto cd = null;
+        if (c != null) {
+            cd = new CourseDto(c.getId(), c.getName(), c.getDescription());
+        }
+
+        return new EnrollmentDto(enrollment.getId(), enrollment.isCompleted(), sd, cd);
+    }
+    
     
     @PostMapping
     public ResponseEntity<?> create(@RequestBody EnrollmentRequest request) {
@@ -84,7 +109,7 @@ public class EnrollmentController {
         enrollment.setStudent(studentOpt.get());
         enrollment.setCourse(courseOpt.get());
         Enrollment saved = enrollmentRepository.save(enrollment);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(toDto(saved));
     }
 
     @PutMapping("/{id}/complete")
@@ -94,6 +119,6 @@ public class EnrollmentController {
         Enrollment e = opt.get();
         e.setCompleted(true);
         enrollmentRepository.save(e);
-        return ResponseEntity.ok(e);
+        return ResponseEntity.ok(toDto(e));
     }
 }

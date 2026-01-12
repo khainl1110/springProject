@@ -31,6 +31,12 @@ public class Student {
 
     // Getters and setters
 
+    public Student() {}
+    public Student(String name, String email) {
+        this.name = name;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }

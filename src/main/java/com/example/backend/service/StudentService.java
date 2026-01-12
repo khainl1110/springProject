@@ -18,12 +18,11 @@ public class StudentService {
             .findByEmailWithFullDetails(email)
             .orElseThrow(() -> new EntityNotFoundException("Student not found: " + email));
 
-        System.out.println("Student: {} has {} enrollments" + 
-            student.getName() + " " + student.getEnrollments().size());
+        System.out.println("Student: " + student.getName() + " has " + student.getEnrollments().size() + " enrollments");
         
         student.getEnrollments().forEach(e -> {
-            System.out.println("  → Course: {}" + " " + e.getCourse().getName());
-            System.out.println("    Prereqs: {}" + " " + e.getCourse().getPrerequisites().size());
+            System.out.println("Course: " + e.getCourse().getName());
+            System.out.println("Prereqs: " + e.getCourse().getPrerequisites().size());
         });
         
         return student;
