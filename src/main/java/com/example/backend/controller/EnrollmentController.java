@@ -63,6 +63,12 @@ public class EnrollmentController {
         return enrollments.stream().map(this::toDto).toList();
     }
 
+    @GetMapping("/student/{studentId}")
+    public List<EnrollmentDto> getEnrollmentsByStudentId(@PathVariable Long studentId) {
+        List<Enrollment> enrollments = enrollmentRepository.findByStudentId(studentId);
+        return enrollments.stream().map(this::toDto).toList();
+    }
+
     private EnrollmentDto toDto(Enrollment enrollment) {
         Student s = enrollment.getStudent();
         StudentDto sd = null;
@@ -121,4 +127,6 @@ public class EnrollmentController {
         enrollmentRepository.save(e);
         return ResponseEntity.ok(toDto(e));
     }
+
+    
 }
