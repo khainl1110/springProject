@@ -74,4 +74,5 @@ public class EnrollmentServiceTest {
         List<String> missingPrerequisites = enrollmentService.getMissingPrerequisites(savedStudent.getId(), mainCourse);
         assert(missingPrerequisites.isEmpty());
     }
+
 }

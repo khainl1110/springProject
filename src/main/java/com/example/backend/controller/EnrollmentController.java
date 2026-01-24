@@ -5,6 +5,7 @@ import com.example.backend.entity.Student;
 import com.example.backend.entity.Course;
 import com.example.backend.dto.EnrollmentDto;
 import com.example.backend.dto.StudentDto;
+import com.example.backend.dto.ClassScoreDto;
 import com.example.backend.dto.CourseDto;
 import com.example.backend.repository.EnrollmentRepository;
 import com.example.backend.repository.StudentRepository;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -82,7 +86,16 @@ public class EnrollmentController {
             cd = new CourseDto(c.getId(), c.getName(), c.getDescription());
         }
 
-        return new EnrollmentDto(enrollment.getId(), enrollment.isCompleted(), sd, cd);
+        Set<ClassScoreDto> scoreDtos = enrollment.getScores().stream()
+            .map(cs -> new ClassScoreDto(
+                cs.getAssessmentType(),
+                enrollment.getId(),
+                cs.getScore().toString(),
+                cs.getMaxScore().toString()
+            ))
+            .collect(Collectors.toSet());
+            
+        return new EnrollmentDto(enrollment.getId(), enrollment.isCompleted(), sd, cd, scoreDtos);
     }
     
     

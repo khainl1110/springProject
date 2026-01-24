@@ -11,6 +11,7 @@ import com.example.backend.entity.Course;
 import com.example.backend.entity.Enrollment;
 import com.example.backend.entity.Student;
 
+// use ./gradlew test --tests EnrollmentRepositoryTest.testEnrollmentWithPrerequisite --info for log
 @SpringBootTest
 public class EnrollmentRepositoryTest {
     @Autowired
@@ -73,4 +74,5 @@ public class EnrollmentRepositoryTest {
         assertEquals(1, enrollmentRepository.count());
         assert(mainCourse.getPrerequisites().contains(prerequisite));
     }
+
 }

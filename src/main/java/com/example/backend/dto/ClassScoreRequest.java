@@ -1,14 +1,14 @@
 package com.example.backend.dto;
 
-public class ScoreRequest {
+public class ClassScoreRequest {
     private String assessmentType; // e.g., "Midterm", "Final", "Quiz"
     private Long enrollmentId;
     private String score;
     private String maxScore;
 
-    public ScoreRequest() {}
+    public ClassScoreRequest() {}
 
-    public ScoreRequest(String assessmentType, Long enrollmentId, String score, String maxScore) {
+    public ClassScoreRequest(String assessmentType, Long enrollmentId, String score, String maxScore) {
         this.assessmentType = assessmentType;
         this.enrollmentId = enrollmentId;
         this.score = score;

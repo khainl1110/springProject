@@ -47,6 +47,10 @@ public class Enrollment {
         return course;
     }
 
+    public Set<ClassScore> getScores() {
+        return scores;
+    }
+
     public boolean isCompleted() {
         return completed;
     }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.example.backend.dto.ScoreRequest;
+import com.example.backend.dto.ClassScoreRequest;
 import com.example.backend.entity.ClassScore;
 import com.example.backend.entity.Enrollment;
 import com.example.backend.repository.ClassScoreRepository;
@@ -20,7 +20,7 @@ public class ClassScoreService {
     @Autowired
     ClassScoreRepository classScoreRepository;
     // Add service methods here
-    public ClassScore createClassScore(@RequestBody ScoreRequest scoreRequest) {
+    public ClassScore createClassScore(@RequestBody ClassScoreRequest scoreRequest) {
         // Implementation goes here
         Optional<Enrollment> enrollmentOpt = enrollmentRepository.findById(scoreRequest.getEnrollmentId());
         if (enrollmentOpt.isEmpty()) {
