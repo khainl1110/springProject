@@ -25,4 +25,5 @@ public interface ClassScoreRepository extends JpaRepository<ClassScore, Long> {
             @Param("studentId") Long studentId, 
             @Param("classId") Long classId);
     
+
 }

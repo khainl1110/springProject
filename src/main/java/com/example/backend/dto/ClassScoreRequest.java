@@ -30,4 +30,19 @@ public class ClassScoreRequest {
     public String getMaxScore() {
         return maxScore;
     }
+
+    public void setAssessmentType(String assessmentType) {
+        this.assessmentType = assessmentType;
+    }
+
+    public void setEnrollmentId(Long enrollmentId) {
+        this.enrollmentId = enrollmentId;
+    }
+
+    public void setScore(String score) {
+        this.score = score;
+    }
+    public void setMaxScore(String maxScore) {
+        this.maxScore = maxScore;
+    }
 }

@@ -25,6 +25,10 @@ spring:
     import:
     - "optional:file:.env"
   datasource: 
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-init-sql: "DISCARD ALL"
     url: ${db_url}
     username: ${db_username}
     driver-class-name: org.postgresql.Driver

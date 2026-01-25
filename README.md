@@ -12,3 +12,4 @@ Schema:
 
 Current functionalities included: add course/student/enrollment
 - Course can add prerequisites, if student didn't complete prerequisites, they are not allow to enroll in the courses
+- Student can add scores and query scores based on class or their entire score

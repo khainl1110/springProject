@@ -43,8 +43,6 @@ public class ClassScoreController {
 
     @PostMapping
     public String createClassScore(@RequestBody ClassScoreRequest scoreRequest) {
-        // (Enrollment enrollment, String assessmentType, BigDecimal score, BigDecimal maxScore, Instant recordedAt) {
-
         ClassScore classScore = classScoreService.createClassScore(scoreRequest);
         return classScore.toString();
     }
