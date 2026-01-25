@@ -32,8 +32,8 @@ public class EnrollmentControllerTest {
         courseRepository.deleteAll();
 
         Student testStudent = studentRepository.save(new Student("jane.doe@gmail.com", "Jane Doe"));
-        Course mainCourse = courseRepository.save(new Course("Math 101", "Mathematics"));
-        Course prerequisiteCourse = courseRepository.save(new Course("Intro to Math", "Introduction to Mathematics"));
+        Course mainCourse = courseRepository.save(new Course("MA101", "Math 101", "Mathematics"));
+        Course prerequisiteCourse = courseRepository.save(new Course("INTRO101", "Intro to Math", "Introduction to Mathematics"));
 
         studentRepository.save(testStudent);
         mainCourse.getPrerequisites().add(prerequisiteCourse);

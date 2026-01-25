@@ -18,6 +18,9 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(unique = true, length = 10, nullable = false)
+    private String code;
+
     @Column(name = "name")
     private String name;
 
@@ -33,15 +36,24 @@ public class Course {
 
     public Course() {}
     
-    public Course(String name, String description) {
+    public Course(String code, String name, String description) {
         this.name = name;
         this.description = description;
+        this.code = code;
     }
     public Long getId() {
         return id;
     }
     public String getName() {
         return name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDescription() {

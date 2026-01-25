@@ -40,10 +40,10 @@ public class EnrollmentServiceTest {
         student.setName("Jane Doe");
         Student savedStudent = studentRepository.save(student);
         
-        Course prerequisite = new Course("Intro to Math", "Introduction to Mathematics");
+        Course prerequisite = new Course("INTRO101", "Intro to Math", "Introduction to Mathematics");
         courseRepository.save(prerequisite);
 
-        Course mainCourse = new Course("Advance Math", "Advanced Mathematics");
+        Course mainCourse = new Course("ADV101", "Advance Math", "Advanced Mathematics");
         mainCourse.getPrerequisites().add(prerequisite);
         courseRepository.save(mainCourse);
 
@@ -58,10 +58,10 @@ public class EnrollmentServiceTest {
         student.setName("Jane Doe");
         Student savedStudent = studentRepository.save(student);
         
-        Course prerequisite = new Course("Intro to Math", "Introduction to Mathematics");
+        Course prerequisite = new Course("INTRO101", "Intro to Math", "Introduction to Mathematics");
         courseRepository.save(prerequisite);
 
-        Course mainCourse = new Course("Advance Math", "Advanced Mathematics");
+        Course mainCourse = new Course("ADV101", "Advance Math", "Advanced Mathematics");
         mainCourse.getPrerequisites().add(prerequisite);
         courseRepository.save(mainCourse);
 

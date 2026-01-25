@@ -35,7 +35,7 @@ public class EnrollmentRepositoryTest {
         Miscell.addOneStudent("john.doe@example.com", "John Doe", studentRepository);
         Student student = studentRepository.findAll().get(0);
 
-        Miscell.addOneCourse("Math 101", "Basic Mathematics", courseRepository);
+        Miscell.addOneCourse("MATH101", "Math 101", "Basic Mathematics", courseRepository);
         Course course = courseRepository.findAll().get(0);
 
         Miscell.addOneEnrollment(student, course, enrollmentRepository);
@@ -50,10 +50,10 @@ public class EnrollmentRepositoryTest {
         Miscell.addOneStudent("jane.doe@example.com", "Jane Doe", studentRepository);
         Student student = studentRepository.findAll().get(0);
 
-        Course prerequisite = new Course("Intro to Math", "Introduction to Mathematics");
+        Course prerequisite = new Course("INTRO101", "Intro to Math", "Introduction to Mathematics");
         courseRepository.save(prerequisite);
 
-        Course mainCourse = new Course("Advance Math", "Advanced Mathematics");
+        Course mainCourse = new Course("ADV101", "Advance Math", "Advanced Mathematics");
         mainCourse.getPrerequisites().add(prerequisite);
         courseRepository.save(mainCourse);
 

@@ -21,9 +21,12 @@
 #   #     value-serializer: org.apache.kafka.common.serialization.StringSerializer
 
 spring:
+  config:
+    import:
+    - "optional:file:.env"
   datasource: 
-    url: jdbc:postgresql://aws-1-ap-northeast-2.pooler.supabase.com:6543/postgres?user=postgres.eejtndrugqwkxtbdmdgf&password=Nguoihung2468
-    username: postgres.eejtndrugqwkxtbdmdgf
+    url: ${db_url}
+    username: ${db_username}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

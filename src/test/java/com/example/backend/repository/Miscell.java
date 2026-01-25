@@ -12,8 +12,8 @@ public class Miscell {
         studentRepository.save(student);
     }
 
-    public static void addOneCourse(String title, String description, CourseRepository courseRepository) {
-        Course course = new Course(title, description);
+    public static void addOneCourse(String code, String title, String description, CourseRepository courseRepository) {
+        Course course = new Course(code, title, description);
         courseRepository.save(course);
     }
 

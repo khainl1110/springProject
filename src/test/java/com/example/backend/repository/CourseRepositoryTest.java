@@ -26,7 +26,7 @@ public class CourseRepositoryTest {
     @Test
     void addCourse() {
         // Implementation for adding a course and testing can be added here
-        Course course = new Course("Intro to Art", "Learn the basics of art.");
+        Course course = new Course("ART101", "Intro to Art", "Learn the basics of art.");
 
         courseRepository.save(course);
         assert(courseRepository.count() == 1);
@@ -34,7 +34,7 @@ public class CourseRepositoryTest {
 
     @Test
     void addAnotherCourse() {
-        Course course = new Course("Advanced Art", "Learn advanced art techniques.");
+        Course course = new Course("ART102","Advanced Art", "Learn advanced art techniques.");
 
         courseRepository.save(course);
         assert(courseRepository.count() == 1);
@@ -42,10 +42,10 @@ public class CourseRepositoryTest {
 
     @Test
     void addPrerequisiteCourse() {
-        Course prerequisite = new Course("Basic Drawing", "Learn basic drawing skills.");
+        Course prerequisite = new Course("DRAW101", "Basic Drawing", "Learn basic drawing skills.");
         courseRepository.save(prerequisite);
 
-        Course mainCourse = new Course("Sketching", "Learn sketching techniques.");
+        Course mainCourse = new Course("SKETCH101", "Sketching", "Learn sketching techniques.");
         mainCourse.getPrerequisites().add(prerequisite);
         courseRepository.save(mainCourse);
 

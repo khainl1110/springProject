@@ -48,7 +48,8 @@ public class Enrollment {
     }
 
     public Set<ClassScore> getScores() {
-        return scores;
+        // when no scores, return empty set instead of null
+        return scores != null ? scores : Set.of();
     }
 
     public boolean isCompleted() {
