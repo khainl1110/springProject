@@ -13,3 +13,9 @@ Schema:
 Current functionalities included: add course/student/enrollment
 - Course can add prerequisites, if student didn't complete prerequisites, they are not allow to enroll in the courses
 - Student can add scores and query scores based on class or their entire score
+
+# What I learn
+- How to use Hibernate to map to SQL
+- JPA method naming convetion to build queries without using SQL: https://dev.to/krishna-nayak/spring-data-jpa-method-naming-conventions-build-queries-without-writing-sql-23o5
+- N+1 fixes using DTO object
+- Implemented defensive null-safety pattern for Enrollment object
