@@ -13,3 +13,6 @@ Schema:
 Current functionalities included: add course/student/enrollment
 - Course can add prerequisites, if student didn't complete prerequisites, they are not allow to enroll in the courses
 - Student can add scores and query scores based on class or their entire score
+
+## Set up
+- In order to get this running, set up a local .env file with db values and url, db_url and db_username (Supabase)

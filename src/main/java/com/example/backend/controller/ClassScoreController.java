@@ -36,6 +36,13 @@ public class ClassScoreController {
         );
     }
     
+    @GetMapping("/enrollment/{enrollmentId}/latest")
+    public ResponseEntity<List<ClassScoreDto>> getLatestByEnrollment(@PathVariable Long enrollmentId) {
+        List<ClassScore> latestScores = classScoreRepository.findLatestScoresByEnrollmentId(enrollmentId);
+        List<ClassScoreDto> latestDtos = latestScores.stream().map(this::toDto).toList();
+        return ResponseEntity.ok(latestDtos);
+    }
+
     @GetMapping
     public Iterable<ClassScoreDto> getClassScores() {
         return classScoreRepository.findAll().stream().map(this::toDto).toList();
