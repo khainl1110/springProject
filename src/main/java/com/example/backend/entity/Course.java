@@ -24,6 +24,28 @@ public class Course {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "capacity")
+    private Integer capacity;
+
+    @Column(name = "available_seats")
+    private Integer availableSeats;
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
+    }
+
+    public Integer getAvailableSeats() {
+        return availableSeats;
+    }
+
+    public void setAvailableSeats(Integer availableSeats) {
+        this.availableSeats = availableSeats;
+    }
+
     private String description;
 
     @ManyToMany
