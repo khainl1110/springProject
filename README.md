@@ -18,6 +18,6 @@ Current functionalities included: add course/student/enrollment
 - In order to get this running, set up a local .env file with db values and url, db_url and db_username (Supabase)
 # What I learn
 - How to use Hibernate to map to SQL
-- JPA method naming convetion to build queries without using SQL: https://dev.to/krishna-nayak/spring-data-jpa-method-naming-conventions-build-queries-without-writing-sql-23o5
+- JPA method naming convetion to build queries without using SQL: https://www.java4coding.com/contents/spring/springdatajpa/spring-data-jpa-method-naming-conventions
 - Circular reference fixes using DTO object
 - Implemented defensive null-safety pattern for Enrollment object
