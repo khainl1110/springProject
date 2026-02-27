@@ -22,7 +22,6 @@ import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.Map;
 
-
 @RestController
 @RequestMapping("/student")
 public class StudentController {
@@ -55,8 +54,6 @@ public class StudentController {
         return response;
     }
     
-    
-
     @PostMapping
     public ResponseEntity<?> createStudent(@RequestBody Student student) {
         if (student.getEmail() == null) {

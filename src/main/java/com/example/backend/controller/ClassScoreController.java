@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.backend.dto.ClassScoreDto;
 import com.example.backend.dto.ClassScoreRequest;
 import com.example.backend.entity.ClassScore;
-import com.example.backend.entity.StudentClassGradesProjection;
 import com.example.backend.repository.ClassScoreRepository;
 import com.example.backend.service.ClassScoreService;
 
@@ -54,13 +53,13 @@ public class ClassScoreController {
         return classScore.toString();
     }
 
-    @GetMapping("/student/{studentId}/class/{classId}")
-    public ResponseEntity<List<StudentClassGradesProjection>> getStudentGradesByClass(
-            @PathVariable Long studentId,
-            @PathVariable String classId) {
-        List<StudentClassGradesProjection> grades = classScoreRepository
-                .findByStudentIdAndClassId(studentId, Long.parseLong(classId));
-        return ResponseEntity.ok(grades);
-    }
+    // @GetMapping("/student/{studentId}/class/{classId}")
+    // public ResponseEntity<List<StudentClassGradesProjection>> getStudentGradesByClass(
+    //         @PathVariable Long studentId,
+    //         @PathVariable String classId) {
+    //     List<StudentClassGradesProjection> grades = classScoreRepository
+    //             .findByStudentIdAndClassId(studentId, Long.parseLong(classId));
+    //     return ResponseEntity.ok(grades);
+    // }
 
 }
