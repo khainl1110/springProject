@@ -20,7 +20,7 @@ public class EnrollmentService {
         var prereqs = course.getPrerequisites();
         if (prereqs == null || prereqs.isEmpty()) return List.of();
         return prereqs.stream()
-            .filter(p -> !enrollmentRepository.existsByStudentIdAndCourseIdAndCompletedTrue(studentId, p.getId()))
+            .filter(p -> !enrollmentRepository.existsByStudentIdAndCourseIdAndIsCompletedTrue(studentId, p.getId()))
             .map(Course::getName)
             .collect(Collectors.toList());
     }

@@ -3,6 +3,7 @@ package com.example.backend.entity;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,7 +32,8 @@ public class Enrollment {
     @OneToMany(mappedBy = "enrollment", cascade = CascadeType.ALL) 
     private Set<ClassScore> scores;
 
-    private boolean completed = false;
+    @Column(name = "iscompleted")
+    private boolean isCompleted = false;
 
     // Getters and setters
 
@@ -53,7 +55,7 @@ public class Enrollment {
     }
 
     public boolean isCompleted() {
-        return completed;
+        return isCompleted;
     }
 
     public void setStudent(Student student) {
@@ -65,6 +67,6 @@ public class Enrollment {
     }
 
     public void setCompleted(boolean completed) {
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 }

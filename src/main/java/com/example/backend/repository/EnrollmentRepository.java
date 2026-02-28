@@ -10,7 +10,7 @@ import com.example.backend.entity.Enrollment;
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
 	boolean existsByStudentIdAndCourseId(Long studentId, Long courseId);
 
-	boolean existsByStudentIdAndCourseIdAndCompletedTrue(Long studentId, Long courseId);
+	boolean existsByStudentIdAndCourseIdAndIsCompletedTrue(Long studentId, Long courseId);
 
 	@EntityGraph(attributePaths = {"student","course","scores"})
 	List<Enrollment> findAll();   
