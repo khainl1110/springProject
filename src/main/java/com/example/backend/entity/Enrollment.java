@@ -1,5 +1,6 @@
 package com.example.backend.entity;
 
+import java.util.Date;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -35,10 +36,21 @@ public class Enrollment {
     @Column(name = "iscompleted")
     private boolean isCompleted = false;
 
+    @Column(name = "enrollment_date")
+    private Date enrollmentDate;
+
     // Getters and setters
 
     public Long getId() {
         return id;
+    }
+    
+    public Date getEnrollmentDate() {
+        return enrollmentDate;
+    }
+
+    public void setEnrollmentDate(Date enrollmentDate) {
+        this.enrollmentDate = enrollmentDate;
     }
 
     public Student getStudent() {
