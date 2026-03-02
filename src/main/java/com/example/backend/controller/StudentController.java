@@ -53,7 +53,7 @@ public class StudentController {
         
         return response;
     }
-    
+
     @PostMapping
     public ResponseEntity<?> createStudent(@RequestBody Student student) {
         if (student.getEmail() == null) {

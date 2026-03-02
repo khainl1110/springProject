@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.entity.Enrollment;
 import com.example.backend.dto.EnrollmentDto;
+import com.example.backend.dto.EnrollmentProjection;
 import com.example.backend.dto.Mapper;
 import com.example.backend.repository.EnrollmentRepository;
 import com.example.backend.service.EnrollmentService;
@@ -57,6 +58,12 @@ public class EnrollmentController {
     public List<EnrollmentDto> getEnrollmentsByStudentId(@PathVariable Long studentId) {
         List<Enrollment> enrollments = enrollmentRepository.findByStudentId(studentId);
         return enrollments.stream().map(Mapper::toDto).toList();
+    }
+
+    @GetMapping("/recent-enrollments")
+    public ResponseEntity<?> getRecentEnrollments() {
+        List<EnrollmentProjection> recentEnrollments = enrollmentRepository.findRecentEnrollments();
+        return ResponseEntity.ok(recentEnrollments);
     }
     
     @PostMapping
